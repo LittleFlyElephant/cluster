@@ -9,7 +9,11 @@ import java.util.List;
 public class Node {
     public int id;
     public List<Path> links;
-    public GNNodeValue gnVal;
+    public int d; //点到源点距离
+    public int w; //点权值
+    public int belong; //属于社区
+    public boolean isVisited; //是否被访问
+    public double sum; //边权和
 
     public Node(int id) {
         this.id = id;

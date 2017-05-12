@@ -9,4 +9,5 @@ public interface GNInterface {
     void cluster();
     void calNode(Node source);
     void calPath(Node source);
+    void calQ();
 }
