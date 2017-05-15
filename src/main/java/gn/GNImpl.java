@@ -181,6 +181,7 @@ public class GNImpl implements GNInterface {
             paths.get(i).isDel = false;
             paths.get(i).sum = 0;
         }
+        // 加入对应边
         for (Path p1: paths){
             for (Path p2: paths){
                 if (p1.source.id == p2.target.id && p1.target.id == p2.source.id){
