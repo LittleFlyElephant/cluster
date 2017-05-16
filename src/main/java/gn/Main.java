@@ -1,5 +1,8 @@
 package gn;
 
+import presentation.DrawMain;
+import presentation.PaintInterface;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +44,29 @@ public class Main {
         paths.add(new Path(1, n5, n3));
         paths.add(new Path(1, n5, n4));
         paths.add(new Path(1, n6, n4));
-        GNInterface gn = new GNImpl(nodes, paths);
+        GNImpl gn = new GNImpl(nodes, paths);
         gn.cluster();
+
+        // 输出
+        int[][] map = {
+                {0, 1, 1, 0, 0, 0, 0},
+                {1, 0, 0, 1, 0, 0, 0},
+                {1, 0, 0, 1, 1, 0, 0},
+                {0, 0, 1, 0, 0, 1, 0},
+                {0, 0, 1, 0, 0, 1, 1},
+                {0, 0, 0, 1, 1, 0, 0},
+                {0, 0, 0, 0, 1, 0, 0}
+        };
+//        for (int i = 0; i <= gn.maxQIndex; i++) {
+//            Path p = gn.delPaths.get(i);
+//            map[p.source.id][p.target.id] = 0;
+//            map[p.target.id][p.source.id] = 0;
+//        }
+        int[] vCluster = new int[map.length];
+        for (int i = 0; i < map.length; i++) {
+            vCluster[i] = nodes.get(i).belong;
+        }
+        PaintInterface paint = new DrawMain();
+        paint.drawGraph(map, vCluster);
     }
 }

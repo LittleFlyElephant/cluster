@@ -13,8 +13,9 @@ public class GNImpl implements GNInterface {
     List<Node> nodes;
     List<Path> paths;
     int id = 0;
-    List<Path> delPaths = new ArrayList<Path>();
-    List<Double> qList = new ArrayList<Double>();
+    public List<Path> delPaths = new ArrayList<Path>();
+    public List<Double> qList = new ArrayList<Double>();
+    public int maxQIndex;
     private static int maxQueueSize = 1000;
 
     public GNImpl(List<Node> nodes, List<Path> paths) {
@@ -67,9 +68,26 @@ public class GNImpl implements GNInterface {
             calQ();
         }
         // 寻找最大q值
+        maxQIndex = 0;
         for (int i = 0; i < qList.size(); i++) {
+            if (qList.get(i) > qList.get(maxQIndex))
+                maxQIndex = i;
             System.out.println(qList.get(i));
-            System.out.println(delPaths.get(i).source.id + " " + delPaths.get(i).target.id);
+            System.out.println(delPaths.get(i).source.id+" "+delPaths.get(i).target.id);
+        }
+        // 恢复之后的边
+        for (int i = maxQIndex+1; i < qList.size(); i++) {
+            Path p = delPaths.get(i);
+            p.isDel = false;
+            p.reverse.isDel = false;
+        }
+        setVisFalse();
+        id = -1;
+        for (Node node: nodes){
+            if (!node.isVisited){
+                id ++;
+                dfs(node, id);
+            }
         }
     }
 
@@ -213,6 +231,7 @@ public class GNImpl implements GNInterface {
     private void dfs(Node node, int id){
         node.belong = id;
         for (Path link: node.links){
+            if (link.isDel) continue;
             Node target = link.target;
             if (!target.isVisited) {
                 target.isVisited = true;
