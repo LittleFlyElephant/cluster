@@ -5,44 +5,44 @@
     {"name":"comment_model"},
     {"name":"movie_detail"},
     {"name":"comment_detail"},
-    {"name":"movie_detail_page"},
-    {"name":"comment_list_page"},
-    {"name":"comment_list_url"},
-    {"name":"movie_detail_url"},
-    {"name":"movie_list_page"},
-    {"name":"next_movie_url"},
-    {"name":"next_comment_url"},
+    {"name":"movie_page"},
+    {"name":"comment_list"},
+    {"name":"comment_url"},
+    {"name":"movie_urls"},
+    {"name":"movie_list"},
+    {"name":"next_movie"},
+    {"name":"next_comment"},
     {"name":"start_url"}
   ],
   "operations":[
     {
       "name":"crawl",
       "input":["start_url"],
-      "output":"movie_list_page"
+      "output":"movie_list"
     },
     {
       "name":"extract",
-      "input":["movie_list_page"],
-      "output":"movie_detail_url"
+      "input":["movie_list"],
+      "output":"movie_urls"
     },
     {
       "name":"extract",
-      "input":["movie_list_page"],
-      "output":"next_movie_url"
+      "input":["movie_list"],
+      "output":"next_movie"
     },
     {
       "name":"crawl",
-      "input":["next_movie_url"],
-      "output":"movie_list_page"
+      "input":["next_movie"],
+      "output":"movie_list"
     },
     {
       "name":"crawl",
-      "input":["movie_detail_url"],
-      "output":"movie_detail_page"
+      "input":["movie_urls"],
+      "output":"movie_page"
     },
     {
       "name":"extract",
-      "input":["movie_detail_page"],
+      "input":["movie_page"],
       "output":"movie_detail"
     },
     {
@@ -57,27 +57,27 @@
     },
     {
       "name":"extract",
-      "input":["movie_detail_page"],
-      "output":"comment_list_url"
+      "input":["movie_page"],
+      "output":"comment_url"
     },
     {
       "name":"crawl",
-      "input":["comment_list_url"],
-      "output":"comment_list_page"
+      "input":["comment_url"],
+      "output":"comment_list"
     },
     {
       "name":"extract",
-      "input":["comment_list_page"],
-      "output":"next_comment_url"
+      "input":["comment_list"],
+      "output":"next_comment"
     },
     {
       "name":"crawl",
-      "input":["next_comment_url"],
-      "output":"comment_list_page"
+      "input":["next_comment"],
+      "output":"comment_list"
     },
     {
       "name":"extract",
-      "input":["comment_list_page"],
+      "input":["comment_list"],
       "output":"comment_detail"
     },
     {
