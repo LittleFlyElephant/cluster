@@ -15,13 +15,14 @@ public class Canvas extends JFrame {
     MainPanel panel;
 
     public Canvas(){
+        this.setTitle("结果展示");
         this.setSize(600, 400);
         this.setLocation(300, 200);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
     }
 
     public void paint(int[][] map, int[] cluster){
-        setPoints(2);
+        setPoints(3);
         for (int i = 0; i < map.length; i++) {
             for (int j = i+1; j < map.length; j++) {
                 if (map[i][j] > 0) links.add(new Point(i, j));
@@ -51,6 +52,16 @@ public class Canvas extends JFrame {
             drawPoints.add(new Point(250, 50));
             drawPoints.add(new Point(200, 80));
             drawPoints.add(new Point(250, 80));
+        } else if (i == 3){
+            drawPoints.add(new Point(50, 100));
+            drawPoints.add(new Point(100, 150));
+            drawPoints.add(new Point(220, 50));
+            drawPoints.add(new Point(135, 100));
+            drawPoints.add(new Point(170, 100));
+            drawPoints.add(new Point(150, 150));
+            drawPoints.add(new Point(100, 100));
+            drawPoints.add(new Point(100, 50));
+            drawPoints.add(new Point(220, 150));
         }
     }
 

@@ -40,7 +40,7 @@ public class GNImpl implements GNInterface {
                 calPath(source);
                 //加到总的里面
                 for (int j = 0; j < paths.size(); j++) {
-                    Path p = paths.get(i);
+                    Path p = paths.get(j);
                     p.sum += p.single;
                 }
             }
@@ -75,6 +75,7 @@ public class GNImpl implements GNInterface {
             System.out.println(qList.get(i));
             System.out.println(delPaths.get(i).source.id+" "+delPaths.get(i).target.id);
         }
+        System.out.println(maxQIndex);
         // 恢复之后的边
         for (int i = maxQIndex+1; i < qList.size(); i++) {
             Path p = delPaths.get(i);
@@ -141,6 +142,7 @@ public class GNImpl implements GNInterface {
                 if (link.target.d == head.d + 1)
                     sum += link.single;
             }
+//            System.out.println("head: "+head.id+" ;sum: "+sum);
             for (Path link: links){
                 if (link.isDel) continue;
                 if (link.target.d == head.d - 1){
@@ -181,6 +183,7 @@ public class GNImpl implements GNInterface {
             }
         }
         Q /= (2.0*M);
+//        System.out.println(Q+"----------------------");
         qList.add(Q);
     }
 

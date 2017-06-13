@@ -17,77 +17,77 @@
   "operations":[
     {
       "name":"crawl",
-      "input":"start_url",
+      "input":["start_url"],
       "output":"movie_list_page"
     },
     {
       "name":"extract",
-      "input":"movie_list_page",
+      "input":["movie_list_page"],
       "output":"movie_detail_url"
     },
     {
       "name":"extract",
-      "input":"movie_list_page",
+      "input":["movie_list_page"],
       "output":"next_movie_url"
     },
     {
       "name":"crawl",
-      "input":"next_movie_url",
+      "input":["next_movie_url"],
       "output":"movie_list_page"
     },
     {
       "name":"crawl",
-      "input":"movie_detail_url",
+      "input":["movie_detail_url"],
       "output":"movie_detail_page"
     },
     {
       "name":"extract",
-      "input":"movie_detail_page",
+      "input":["movie_detail_page"],
       "output":"movie_detail"
     },
     {
       "name":"generate",
-      "input":"movie_detail",
+      "input":["movie_detail"],
       "output":"movie_model"
     },
     {
       "name":"export",
-      "input":"movie_model",
+      "input":["movie_model"],
       "output":"db_items"
     },
     {
       "name":"extract",
-      "input":"movie_detail_page",
+      "input":["movie_detail_page"],
       "output":"comment_list_url"
     },
     {
       "name":"crawl",
-      "input":"comment_list_url",
+      "input":["comment_list_url"],
       "output":"comment_list_page"
     },
     {
       "name":"extract",
-      "input":"comment_list_page",
+      "input":["comment_list_page"],
       "output":"next_comment_url"
     },
     {
       "name":"crawl",
-      "input":"next_comment_url",
+      "input":["next_comment_url"],
       "output":"comment_list_page"
     },
     {
       "name":"extract",
-      "input":"comment_list_page",
+      "input":["comment_list_page"],
       "output":"comment_detail"
     },
     {
       "name":"generate",
-      "input":"comment_detail",
+      "input":["comment_detail"],
       "output":"comment_model"
     },
     {
       "name":"export",
-      "input":"comment_model",
+      "input":["comment_model"],
       "output":"db_items"
     }
   ]

@@ -23,6 +23,7 @@ public class MainPanel extends JPanel {
         colors.add(Color.BLUE);
         colors.add(Color.RED);
         colors.add(Color.GREEN);
+        colors.add(Color.YELLOW);
     }
 
     @Override
@@ -35,7 +36,7 @@ public class MainPanel extends JPanel {
             g.setColor(colors.get(cluster[i]));
             g.fillOval(p.x, p.y, 20, 20);
             g.setColor(Color.WHITE);
-            g.drawString(String.valueOf(i), p.x+5, p.y+15);
+            g.drawString(String.valueOf(i+1), p.x+5, p.y+15);
         }
         for (int i = 0; i < links.size(); i++) {
             Point link = links.get(i);

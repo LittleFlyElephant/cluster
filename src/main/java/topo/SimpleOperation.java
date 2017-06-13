@@ -1,35 +1,44 @@
 package topo;
 
+import java.util.List;
+
 /**
  * Created by st0001 on 2017/6/12.
  */
 public class SimpleOperation {
-    private String operationName;
-    private SimpleData inputData;
-    private SimpleData outputData;
+    private String name;
+    private List<BaseData> input;
+    private BaseData output;
 
-    public void setOperationName(String operationName) {
-        this.operationName = operationName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setInputData(SimpleData inputData) {
-        this.inputData = inputData;
+    public void setInput(List<BaseData> input) {
+        this.input = input;
     }
 
-    public void setOutputData(SimpleData outputData) {
-        this.outputData = outputData;
+    public void setOutput(BaseData output) {
+        this.output = output;
     }
 
-    public String getOperationName() {
-
-        return operationName;
+    public SimpleOperation(SimpleOperation operation) {
+        this.name = operation.name;
     }
 
-    public SimpleData getInputData() {
-        return inputData;
+    public SimpleOperation() {
     }
 
-    public SimpleData getOutputData() {
-        return outputData;
+    public String getName() {
+
+        return name;
+    }
+
+    public List<BaseData> getInput() {
+        return input;
+    }
+
+    public BaseData getOutput() {
+        return output;
     }
 }
