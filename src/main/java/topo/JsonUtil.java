@@ -102,7 +102,7 @@ public class JsonUtil {
         DataFlowGraph graph = JsonUtil.getGraphFromJson("src/main/resources/Sample1.json");
         JsonUtil.printGraph(graph);
         CombineAlgorithm algorithm = new CombineAlgorithm();
-        DataFlowGraph newGraph = algorithm.combine(graph);
+        DataFlowGraph newGraph = algorithm.divide(graph);
         JsonUtil.printGraph(newGraph);
     }
 }
