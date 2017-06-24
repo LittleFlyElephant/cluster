@@ -25,48 +25,55 @@ public class CombineAlgorithm {
             if (index<0){
                 //如果有一个新操作
                 SimpleOperation newOp = new SimpleOperation(operation);
-                //寻找新的输入data
-                List<BaseData> abstractInputs = new ArrayList<BaseData>();
-                List<BaseData> inputs = operation.getInput();
-                for (BaseData data: inputs) {
-                    AbstractData abstractInputData = null;
-                    if (data.getDataId()>0) {
-                        abstractInputData = findDataById(data.getDataId(), abstractDatas);
-                    } else {
-                        abstractInputData = newAbstractData(data);
-                    }
-                    abstractInputData.getOutputOperations().add(newOp);
-                    abstractInputs.add(abstractInputData);
-                }
-                newOp.setInput(abstractInputs);
                 //寻找新的输出data
-                AbstractData abstractOutputData = null;
-                if (operation.getOutput().getDataId()>0){
-                     abstractOutputData = findDataById(operation.getOutput().getDataId(), abstractDatas);
-                } else {
-                    abstractOutputData = newAbstractData(operation.getOutput());
-                }
+                AbstractData abstractOutputData = newAbstractData(operation.getOutput());
                 abstractOutputData.getInputOperations().add(newOp);
                 newOp.setOutput(abstractOutputData);
                 newOpList.add(newOp);
+                addInputToNewOp(newOp, operation);
             } else {
                 //如果是一个已有操作
                 SimpleOperation existOp = newOpList.get(index);
-                List<BaseData> inputDatas = existOp.getInput();
-                for (int i = 0; i < inputDatas.size(); i++) {
-                    //对应设置
-                    BaseData input = operation.getInput().get(i);
-                    AbstractData abInput = (AbstractData)inputDatas.get(i);
-                    combine(input, abInput);
-                }
                 BaseData output = operation.getOutput();
                 AbstractData abOutput = (AbstractData)existOp.getOutput();
-                combine(output, abOutput);
+//                combine(output, abOutput);
+                abOutput.getDatas().add(output);
+                output.setDataId(abOutput.getDataId());
+                addInputToNewOp(existOp, operation);
             }
+        }
+        //deal with init data
+        AbstractData initData = new AbstractData(dataId++);
+        for (BaseData data: originGraph.getDatas()) {
+            if (data.getDataId()<=0){
+                data.setDataId(initData.getDataId());
+                initData.getDatas().add(data);
+            }
+        }
+        abstractDatas.add(initData);
+        //deal with input
+        for (SimpleOperation newOp : newOpList) {
+            List<BaseData> inputs = new ArrayList<BaseData>();
+            for (BaseData input : newOp.getInput()) {
+                AbstractData group = findDataById(input.getDataId(), abstractDatas);
+                if (findDataById(group.getDataId(), inputs)==null){
+                    inputs.add(group);
+                    group.getOutputOperations().add(newOp);
+                }
+            }
+            newOp.setInput(inputs);
         }
         abstractGraph.setDatas(abstractDatas);
         abstractGraph.setOperations(newOpList);
         return abstractGraph;
+    }
+
+    private void addInputToNewOp(SimpleOperation newOp, SimpleOperation oldOp){
+        for (BaseData data : oldOp.getInput()) {
+            //增加，并没有去掉原来的边
+            data.getOutputOperations().add(newOp);
+            newOp.getInput().add(data);
+        }
     }
 
     private void combine(BaseData baseData, AbstractData abData){
@@ -115,8 +122,8 @@ public class CombineAlgorithm {
         //TODO 这里需要考虑是不是生成不同输出的操作需要作为不同操作,或者可能有多个输出生成
         for (int i = 0; i < list.size(); i++) {
             SimpleOperation existOp = list.get(i);
-            if (existOp.getName().equals(op.getName())
-                    && existOp.getInput().size() == op.getInput().size()){
+            if (existOp.getName().equals(op.getName())) {
+//                    && existOp.getInput().size() == op.getInput().size()){
                 return i;
             }
         }

@@ -1,5 +1,6 @@
 package topo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ public class SimpleOperation {
 
     public SimpleOperation(SimpleOperation operation) {
         this.name = operation.name;
+        this.input = new ArrayList<BaseData>();
     }
 
     public SimpleOperation() {

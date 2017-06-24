@@ -99,7 +99,7 @@ public class JsonUtil {
     }
 
     public static void main(String[] args) {
-        DataFlowGraph graph = JsonUtil.getGraphFromJson("src/main/resources/Sample4.json");
+        DataFlowGraph graph = JsonUtil.getGraphFromJson("src/main/resources/Sample3.json");
         JsonUtil.printGraph(graph);
         CombineAlgorithm algorithm = new CombineAlgorithm();
         DataFlowGraph newGraph = algorithm.divide(graph);
