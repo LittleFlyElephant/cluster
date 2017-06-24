@@ -1,8 +1,8 @@
 {
   "data":[
-    {"name":"db"},
+    {"name":"film_list"},
     {"name":"cinema_list"},
-    {"name":"play_list"},
+    {"name":"play_info"},
     {"name":"time"},
     {"name":"film_name"},
     {"name":"cinema_name"},
@@ -14,18 +14,13 @@
   "operations":[
     {
       "name":"query",
-      "input":["db"],
-      "output":"cinema_list"
-    },
-    {
-      "name":"query",
-      "input":["db"],
-      "output":"play_list"
-    },
-    {
-      "name":"query",
-      "input":["db"],
+      "input":["film_list","film_name"],
       "output":"film_detail"
+    },
+    {
+      "name":"query",
+      "input":["play_info","platform_list"],
+      "output":"diff_prices"
     },
     {
       "name":"extract",
@@ -33,43 +28,13 @@
       "output":"cinema_name"
     },
     {
-      "name":"filter",
-      "input":["time"],
-      "output":"play_list"
-    },
-    {
-      "name":"filter",
-      "input":["film_name"],
-      "output":"play_list"
-    },
-    {
-      "name":"filter",
-      "input":["cinema_name"],
-      "output":"play_list"
-    },
-    {
-      "name":"filter",
-      "input":["film_name"],
-      "output":"film_detail"
+      "name":"compose",
+      "input":["cinema_name","time","film_name"],
+      "output":"play_info"
     },
     {
       "name":"compose",
-      "input":["play_list"],
-      "output":"diff_prices"
-    },
-    {
-      "name":"compose",
-      "input":["platform_list"],
-      "output":"diff_prices"
-    },
-    {
-      "name":"compose",
-      "input":["diff_prices"],
-      "output":"main_page"
-    },
-    {
-      "name":"compose",
-      "input":["film_detail"],
+      "input":["diff_prices","film_detail"],
       "output":"main_page"
     }
   ]
